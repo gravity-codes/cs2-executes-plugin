@@ -4,21 +4,21 @@ using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Entities.Constants;
 using CounterStrikeSharp.API.Modules.Utils;
-//using Executes.Objects.JsonConverters;
+using Executes.Models.JsonConverters;
 
 namespace Executes
 {
     public static class Helpers
     {
-        //internal static readonly JsonSerializerOptions JsonSerializerOptions = new()
-        //{
-        //    WriteIndented = true,
-        //    Converters =
-        //    {
-        //        new VectorJsonConverter(),
-        //        new QAngleJsonConverter()
-        //    }
-        //};
+        internal static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        {
+            WriteIndented = true,
+            Converters =
+            {
+                new VectorJsonConverter(),
+                new QAngleJsonConverter()
+            }
+        };
 
         public static CCSGameRules GetGameRules()
         {

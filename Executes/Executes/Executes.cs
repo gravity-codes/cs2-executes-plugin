@@ -3,6 +3,8 @@ using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes.Registration;
 using CounterStrikeSharp.API.Modules.Commands;
 using CounterStrikeSharp.API.Modules.Utils;
+using Executes.Configs;
+using Executes.Enums;
 using Executes.Models;
 
 namespace Executes
@@ -17,7 +19,7 @@ namespace Executes
         #endregion
 
         private bool inDevMode = false;
-        private GrenadeThrow? lastGrenade;
+        private Grenade? lastGrenade;
 
         public ExecutesConfig Config { get; set; } = new ExecutesConfig();
 
@@ -80,9 +82,12 @@ namespace Executes
                 Vector position = new(projectile.AbsOrigin!.X, projectile.AbsOrigin.Y, projectile.AbsOrigin.Z);
                 QAngle angle = new(projectile.AbsRotation!.X, projectile.AbsRotation.Y, projectile.AbsRotation.Z);
                 Vector velocity = new(projectile.AbsVelocity.X, projectile.AbsVelocity.Y, projectile.AbsVelocity.Z);
-                string nadeType = Constants.ProjectileTypeMap[entity.Entity.DesignerName];
+                EGrenade nadeType = (EGrenade)entity.Entity.DesignerName.ToEnum();
 
-                lastGrenade = new GrenadeThrow(
+                lastGrenade = new Grenade(
+                    0,
+                    "last_grenade",
+                    CsTeam.None,
                     position,
                     angle,
                     velocity,
@@ -123,7 +128,7 @@ namespace Executes
         {
             if (!inDevMode || lastGrenade == null || player == null) return;
 
-            AddTimer(lastGrenade.Delay, () => lastGrenade.Throw(player));
+            AddTimer(lastGrenade.Delay, () => lastGrenade.Throw());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Executes.Models
         public static string smokeGrenadeProjectileSig = RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? smokeGrenadeProjectileLinuxSig : smokeGrenadeProjectileWindowsSig;
         public static MemoryFunctionWithReturn<nint, nint, nint, nint, nint, nint, nint, int> CSmokeGrenadeProjectile_CreateFunc = new(smokeGrenadeProjectileSig);
 
-        public static nint Create(Vector position, QAngle angle, Vector velocity, CCSPlayerController player)
+        public static nint Create(Vector position, QAngle angle, Vector velocity, CsTeam team)
         {
             return CSmokeGrenadeProjectile_CreateFunc.Invoke(
                 position.Handle,
@@ -22,7 +22,7 @@ namespace Executes.Models
                 velocity.Handle,
                 nint.Zero,
                 45,
-                player.TeamNum
+                (byte)team
             );
         }
     }

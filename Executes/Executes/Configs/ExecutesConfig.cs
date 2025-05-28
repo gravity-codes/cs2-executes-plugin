@@ -1,7 +1,7 @@
 ﻿using CounterStrikeSharp.API.Core;
 using System.Text.Json.Serialization;
 
-namespace Executes
+namespace Executes.Configs
 {
     public class ChatMessagePrefix
     {

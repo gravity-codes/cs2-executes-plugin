@@ -5,9 +5,9 @@ using CounterStrikeSharp.API.Modules.Utils;
 
 namespace Executes.Models.JsonConverters
 {
-    public class QAngleJsonConverter : JsonConverter<QAngle>
+    public class VectorJsonConverter : JsonConverter<Vector>
     {
-        public override QAngle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Vector Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.String)
             {
@@ -22,7 +22,7 @@ namespace Executes.Models.JsonConverters
 
             var values = stringValue.Split(' '); // Split by space
 
-            Console.WriteLine($"[Executes] QAngle values: {stringValue}");
+            Console.WriteLine($"[Executes] Vector values: {stringValue}");
 
             if (values.Length != 3)
             {
@@ -33,18 +33,18 @@ namespace Executes.Models.JsonConverters
                 !float.TryParse(values[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var y) ||
                 !float.TryParse(values[2], NumberStyles.Any, CultureInfo.InvariantCulture, out var z))
             {
-                Console.WriteLine($"[Executes] Unable to parse QAngle float values for: '{stringValue}'");
-                throw new JsonException($"Unable to parse QAngle float values for '{stringValue}'.");
+                Console.WriteLine($"[Executes] Unable to parse Vector float values for: '{stringValue}'");
+                throw new JsonException($"Unable to parse Vector float values for '{stringValue}'.");
             }
 
-            return new QAngle(x, y, z);
+            return new Vector(x, y, z);
         }
 
-        public override void Write(Utf8JsonWriter writer, QAngle value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Vector value, JsonSerializerOptions options)
         {
             // Convert Vector object to string representation (example assumes ToString() returns desired format)
-            var qangleString = value.ToString();
-            writer.WriteStringValue(qangleString);
+            var vectorString = value.ToString();
+            writer.WriteStringValue(vectorString);
         }
     }
 }
