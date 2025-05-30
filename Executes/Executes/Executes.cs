@@ -82,12 +82,12 @@ namespace Executes
                 Vector position = new(projectile.AbsOrigin!.X, projectile.AbsOrigin.Y, projectile.AbsOrigin.Z);
                 QAngle angle = new(projectile.AbsRotation!.X, projectile.AbsRotation.Y, projectile.AbsRotation.Z);
                 Vector velocity = new(projectile.AbsVelocity.X, projectile.AbsVelocity.Y, projectile.AbsVelocity.Z);
-                EGrenade nadeType = (EGrenade)entity.Entity.DesignerName.ToEnum();
+                EGrenade nadeType = (EGrenade)entity.Entity.DesignerName.DesignerNameToEnum();
 
                 lastGrenade = new Grenade(
                     0,
                     "last_grenade",
-                    CsTeam.None,
+                    player.Team,
                     position,
                     angle,
                     velocity,

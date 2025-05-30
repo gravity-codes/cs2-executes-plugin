@@ -57,7 +57,7 @@ namespace Executes.Models
             }
             else
             {
-                var entity = Utilities.CreateEntityByName<CBaseCSGrenadeProjectile>(Type.GetDesignerName());
+                var entity = Utilities.CreateEntityByName<CBaseCSGrenadeProjectile>(Type.GetProjectileName());
 
                 if (entity == null)
                 {
